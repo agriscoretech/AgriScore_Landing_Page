@@ -62,7 +62,7 @@ export function Navbar() {
                 Sign In
               </Button>
             </Link>
-            <Link href="https://myagriscore.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <Link href="https://agri-score-dashboard.vercel.app/" target="_blank" rel="noopener noreferrer">
               <Button className="rounded-full bg-white text-black hover:bg-neutral-200 text-[12px] uppercase tracking-[0.2em] font-bold px-8 h-10 transition-all hover:scale-105">
                 Experience
               </Button>
@@ -126,7 +126,7 @@ export function Navbar() {
                   Sign In
                 </Button>
               </Link>
-              <Link href="https://myagriscore.vercel.app/" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)} className="block w-full">
+              <Link href="https://agri-score-dashboard.vercel.app/" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)} className="block w-full">
                 <Button className="w-full h-16 rounded-full bg-white text-black text-[14px] uppercase tracking-[0.3em] font-bold">
                   Experience
                 </Button>
