@@ -1,23 +1,27 @@
 function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  
-  if(e.postData.type === "application/json") {
-    // Parse the JSON sent from Next.js
-    const data = JSON.parse(e.postData.contents);
-    
-    // Extract properties to push
-    const name = data.name || "";
-    const email = data.email || "";
-    const whatsapp = data.whatsapp || "";
-    const product = data.product || "";
-    const address = data.address || "";
-    const state = data.state || "";
-    const pincode = data.pincode || "";
-    const country = data.country || "";
-    const purpose = data.purpose || "";
-    const date = new Date();
+  var lock = LockService.getScriptLock();
+  // Wait for up to 10 seconds for other processes to finish
+  lock.tryLock(10000);
 
-    // Make sure your Google sheet columns match these rows exactly
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var contents = (e && e.postData) ? e.postData.contents : "{}";
+    var data = JSON.parse(contents);
+    
+    // Extract fields
+    var name = data.name || "";
+    var email = data.email || "";
+    // Prefix phone number with "'" so Google Sheets treats "+91..." as plain text instead of a formula (#ERROR!)
+    var whatsapp = data.whatsapp ? ("'" + data.whatsapp) : "";
+    var product = data.product || "";
+    var address = data.address || "";
+    var state = data.state || "";
+    var pincode = data.pincode ? ("'" + data.pincode) : "";
+    var country = data.country || "India";
+    var purpose = data.purpose || "";
+    var date = new Date();
+
+    // Append to sheet (Columns: Date, Name, Email, WhatsApp, Product, Address, State, Pincode, Country, Purpose)
     sheet.appendRow([
       date,
       name,
@@ -31,8 +35,14 @@ function doPost(e) {
       purpose
     ]);
     
-    // Return a valid JSON response so that fetch API sees status 200
-    return ContentService.createTextOutput(JSON.stringify({"status": "success"}))
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "success", message: "Inquiry saved successfully" }))
       .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: "error", message: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } finally {
+    lock.releaseLock();
   }
 }

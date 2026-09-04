@@ -112,6 +112,10 @@ export default function ApplyPage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submittedInfo, setSubmittedInfo] = useState<{
+    fullName: string;
+    position: string;
+  } | null>(null)
   const [resumeFile, setResumeFile] = useState<File | null>(null)
   const [hasResume, setHasResume] = useState<"yes" | "no" | null>(null)
 
@@ -209,17 +213,25 @@ export default function ApplyPage() {
         formData.append("resume", resumeFile)
       }
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      const response = await fetch("/api/submit-application", {
+        method: "POST",
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error("Application submission failed")
+      }
       
-      console.log("Application submitted:", data)
-      
+      setSubmittedInfo({
+        fullName: data.fullName,
+        position: data.position,
+      })
       setIsSubmitted(true)
-      toast.success("Application submitted successfully!")
+      toast.success("Application submitted successfully! Our talent team will review your profile.")
       window.scrollTo({ top: 0, behavior: "smooth" })
       
     } catch (error) {
-      toast.error("Failed to submit application. Please try again.")
+      toast.error("Failed to submit application. Please try again later.")
       console.error("Submission error:", error)
     } finally {
       setIsSubmitting(false)
@@ -669,6 +681,7 @@ export default function ApplyPage() {
   }
 
   if (isSubmitted) {
+    const firstName = submittedInfo?.fullName?.trim().split(" ")[0] || "there";
     return (
       <main className="min-h-screen bg-black text-white">
         <Navbar />
@@ -678,19 +691,20 @@ export default function ApplyPage() {
             animate={{ opacity: 1, scale: 1 }}
             className="max-w-2xl mx-auto text-center space-y-8"
           >
-            <div className="w-24 h-24 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+            <div className="w-24 h-24 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(16,185,129,0.25)]">
               <CheckCircle2 className="h-12 w-12 text-emerald-500" />
             </div>
             <div className="space-y-4">
-              <h1 className="text-5xl md:text-6xl font-serif font-light">Application Received</h1>
-              <p className="text-xl text-white/60 font-light max-w-lg mx-auto leading-relaxed">
-                Thank you for your interest in joining the mission. Our team will review your 
-                application and reach out to you soon.
+              <h1 className="text-4xl md:text-6xl font-serif font-light">
+                Thank You, <span className="italic text-[#D4AF37]">{firstName}</span>
+              </h1>
+              <p className="text-lg md:text-xl text-white/70 font-light max-w-lg mx-auto leading-relaxed">
+                Your application has been registered successfully. Our talent & bio-engineering team will review your portfolio and reach out to you soon.
               </p>
             </div>
             <Link
               href="/careers"
-              className="inline-block mt-8 px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
+              className="inline-block mt-8 px-8 py-4 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors font-medium text-white"
             >
               Back to Careers
             </Link>

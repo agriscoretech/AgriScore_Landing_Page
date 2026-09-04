@@ -17,6 +17,7 @@ const cormorant = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://myagriscore.com"),
   title: {
     default: "AgriScore – Precision Agriculture & Soil Intelligence Platform",
     template: "%s | AgriScore"
@@ -95,14 +96,14 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" className={`${inter.variable} ${cormorant.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${cormorant.variable} antialiased`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-sans bg-black text-white selection:bg-[#D4AF37] selection:text-black">
+      <body className="font-sans bg-black text-white selection:bg-[#D4AF37] selection:text-black" suppressHydrationWarning>
         {children}
         <Toaster />
       </body>

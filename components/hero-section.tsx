@@ -161,10 +161,10 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-10 pt-8">
-            <Link href="/contact">
+            <Link href="/analysis/inquiry">
               <Button size="lg" className="rounded-full bg-[#D4AF37] text-[#1A3C34] hover:bg-[#D4AF37]/90 h-16 md:h-20 px-10 md:px-16 text-[14px] uppercase tracking-[0.4em] font-bold transition-all shadow-[0_0_50px_rgba(212,175,55,0.2)] hover:shadow-[0_0_80px_rgba(212,175,55,0.4)] hover:scale-105 active:scale-95 group relative overflow-hidden border-none">
                 <span className="relative z-10 flex items-center gap-4">
-                  Join the Mission
+                  Pre Order
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-transform duration-500" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />

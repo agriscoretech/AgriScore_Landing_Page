@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
 export function CTASection() {
   return (
@@ -48,9 +49,12 @@ export function CTASection() {
            transition={{ delay: 0.4, duration: 1 }}
            className="flex flex-col items-center gap-10"
         >
-          <Link href="/contact" className="group/cta">
+          <Link href="/analysis/inquiry" className="group/cta">
             <Button size="lg" className="relative overflow-hidden rounded-full bg-[#D4AF37] text-[#1A3C34] hover:bg-white h-20 md:h-24 px-12 md:px-20 text-[12px] md:text-[14px] uppercase tracking-[0.3em] font-bold shadow-[0_20px_60px_rgba(212,175,55,0.3)] transition-all hover:scale-105 active:scale-95 group border-none">
-              <span className="relative z-10">Join the Mission</span>
+              <span className="relative z-10 flex items-center gap-3">
+                Pre Order
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </span>
               <motion.div 
                  className="absolute inset-0 bg-white/40 opacity-0 group-hover/cta:opacity-100 transition-opacity"
                  initial={false}
