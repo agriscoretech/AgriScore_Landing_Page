@@ -343,7 +343,7 @@ export default function ApplyPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="position" className="text-white/80">Position of Interest *</Label>
-              <Select onValueChange={(value) => setValue("position", value)}>
+              <Select onValueChange={(value: string) => setValue("position", value)}>
                 <SelectTrigger className="h-14 bg-white/5 border-white/10 text-white focus:border-emerald-500 text-lg">
                   <SelectValue placeholder="Select a position" />
                 </SelectTrigger>
@@ -360,7 +360,7 @@ export default function ApplyPage() {
 
             <div className="space-y-2">
               <Label htmlFor="experience" className="text-white/80">Years of Experience *</Label>
-              <Select onValueChange={(value) => setValue("experience", value)}>
+              <Select onValueChange={(value: string) => setValue("experience", value)}>
                 <SelectTrigger className="h-14 bg-white/5 border-white/10 text-white focus:border-emerald-500 text-lg">
                   <SelectValue placeholder="Select experience level" />
                 </SelectTrigger>

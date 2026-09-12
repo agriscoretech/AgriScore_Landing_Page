@@ -78,7 +78,23 @@ declare module "next-themes" {
 
 declare module "cmdk" { const anyExport: any; export = anyExport }
 
-declare module "react-hook-form" { const anyExport: any; export = anyExport }
+declare module "react-hook-form" {
+  export function useForm<TFieldValues = any, TContext = any>(props?: any): any
+  export const Controller: any
+  export const FormProvider: any
+  export const useFormContext: any
+  export const useFormState: any
+  export const useWatch: any
+  export const useFieldArray: any
+  export type FieldValues = any
+  export type UseFormReturn<T = any> = any
+  export type UseFormProps<T = any> = any
+  export type SubmitHandler<T = any> = any
+  export type FieldPath<T = any> = any
+  export type ControllerProps<T = any> = any
+  const anyExport: any
+  export default anyExport
+}
 
 declare module "react-day-picker" { const anyExport: any; export = anyExport }
 
