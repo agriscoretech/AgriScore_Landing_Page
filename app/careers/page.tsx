@@ -2,6 +2,7 @@
 
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { InternshipValidationSection } from "@/components/internship-validation-section"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
@@ -25,8 +26,22 @@ const XIcon = ({ className }: { className?: string }) => (
 )
 
 export default function CareersPage() {
+  const handleScrollToValidation = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const target = document.getElementById("internship-validation")
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" })
+      const input = document.getElementById("credential-id-input")
+      if (input) {
+        setTimeout(() => input.focus(), 600)
+      }
+    } else {
+      window.location.hash = "internship-validation"
+    }
+  }
+
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-[#D4AF37] selection:text-black overflow-x-hidden">
+    <main className="min-h-screen bg-black text-white selection:bg-[#D4AF37] selection:text-black overflow-x-clip">
       <Navbar />
 
       {/* 1. The Call to Greatness (Hero) */}
@@ -68,6 +83,28 @@ export default function CareersPage() {
               >
                 Join the mission to redefine excellence in precision agriculture. We are engineering the biological resilience of our planet for future generations.
               </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 1 }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
+              >
+                <Link
+                  href="/apply"
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#D4AF37] text-black font-semibold text-xs uppercase tracking-[0.25em] hover:bg-white transition-all shadow-lg text-center"
+                >
+                  Explore Open Roles
+                </Link>
+                <a
+                  href="#internship-validation"
+                  onClick={handleScrollToValidation}
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/15 text-xs uppercase tracking-[0.25em] transition-all flex items-center justify-center gap-2 group cursor-pointer"
+                >
+                  {ShieldCheck && <ShieldCheck className="h-3.5 w-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />}
+                  <span>Verify Internship</span>
+                </a>
+              </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -267,7 +304,10 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* 5. Final CTA */}
+      {/* 5. Institutional Internship Validation Section */}
+      <InternshipValidationSection />
+
+      {/* 6. Final CTA */}
       <section className="py-40 px-6 relative overflow-hidden text-white">
         {/* Cinematic Backdrop */}
         <div className="absolute inset-0 z-0">

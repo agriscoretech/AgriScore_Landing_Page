@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -505,3 +506,37 @@ body::before {
   letter-spacing: 0.25em;
   text-transform: uppercase;
 }
+
+@media print {
+  @page {
+    size: landscape;
+    margin: 0.8cm;
+  }
+  body {
+    background: #FAF8F2 !important;
+    color: #111827 !important;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .printable-certificate, .printable-certificate * {
+    visibility: visible;
+  }
+  .printable-certificate {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    max-width: none !important;
+    height: auto !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    background: #FAF8F2 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+

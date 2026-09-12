@@ -24,7 +24,7 @@ export function Footer() {
   )
 
   const links = {
-    Missions: ["Research Labs", "Yield Engineering"],
+    Missions: ["Research Labs", "Yield Engineering", "Internship Registry"],
     Inquiries: ["Direct Access", "Partnership", "Investor Relations", "Media Room"],
     Legal: ["Privacy Notice", "Terms and Condition", "Genetic Rights", "Patents"]
   }
@@ -73,6 +73,7 @@ export function Footer() {
                            if (item === "Media Room") href = "/media-room";
                            if (item === "Research Labs") href = "/research-labs";
                            if (item === "Yield Engineering") href = "/yield-engineering";
+                           if (item === "Internship Registry") href = "/careers#internship-validation";
                            
                            return (
                              <li key={item}>
